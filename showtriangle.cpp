@@ -1,5 +1,8 @@
 #include "showtriangle.h"
 
+#include <QPainter>
+#include <QPen>
+
 
 ShowTriangle::ShowTriangle(QWidget *parent)
     :QOpenGLWidget(parent)
@@ -45,4 +48,19 @@ void ShowTriangle::paintGL()
     glColor3f(0.0, 0.0, 1.0);
     glVertex3f( 0.0,  0.5, 0);
     glEnd();
+
+    // render text in widget
+    glDisable(GL_DEPTH_TEST);
+    QPainter painter;
+    painter.begin(this);
+    QPen pen;
+    pen.setColor(Qt::red);
+    painter.setPen(pen);
+    painter.drawText(100, 100, "Hello Triangle");
+    painter.end();
+    glEnable(GL_DEPTH_TEST);
+
+
+
+
 }
